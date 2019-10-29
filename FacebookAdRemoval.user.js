@@ -10,12 +10,17 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
     $('#contentArea').bind('DOMNodeInserted',function(){
         $('.o_t0_-7dywy').each(function(){
             var check = "";
             $(this).children().children().find('.x_t0_-7dyx8').each(function(){
-                 check += $(this).text();
+                 //check += $(this).text();
+                 $.each(this.attributes, function() {
+                     var valueToCheck = this.value;
+                     if (valueToCheck.length < 2 && valueToCheck != ' ') {
+                         check += valueToCheck;
+                     }
+                 });
             });
             if (check === "Sponsored" || check === "ponsored") {
                 $(this).closest('._5jmm').remove();
